@@ -1,0 +1,93 @@
+{% extends 'base.html'%}
+
+
+
+{%block content%}
+<section class="main">
+    <div class="left">
+        <div class="search">
+            <input type="text" placeholder="search for user ...">
+        </div>
+        <div class="users">
+            {%if my_msgs %}
+                {%for msg in my_msgs%}
+                {%if msg[0].id == other_user_id%}
+                <a class="active" href="{{url_for('profile_msgs',user_id = msg[0].id)}}">
+                    <div class="user">
+                        <div class="profile-img">
+                        <img src="{{url_for('static',filename=msg[0].img)}}" alt="">
+                        </div>
+                        <div class="profile-content">
+                            <h2 class="name">{{msg[0].username}}</h2>
+                            <div class="msg">{{msg[1]}}</div>
+                        </div>
+                    </div>
+                </a>
+                {%else%}
+                <a href="{{url_for('profile_msgs',user_id = msg[0].id)}}">
+                    <div class="user">
+                        <div class="profile-img">
+                        <img src="{{url_for('static',filename=msg[0].img)}}" alt="">
+                        </div>
+                        <div class="profile-content">
+                            <h2 class="name">{{msg[0].username}}</h2>
+                            <div class="msg">{{msg[1]}}</div>
+                        </div>
+                    </div>
+                </a>
+                {%endif%}
+                {%endfor%}
+            {%else%}
+                <h1>you have no msgs yet!</h1>
+            {%endif%}
+        </div>
+    </div>
+    <div class="right">
+        <div id="msgs-container" class="msgs">
+            {%if actual_msgs%}
+                {%for msg in actual_msgs%}
+                    {%if msg[0] == user.username %}
+                    <div class="mine-msg">
+                        <div class="msg-content">
+                            <h2>{{msg[0]}}</h2>
+                            <h3>{{msg[1]}}</h3>
+                        </div>
+                    </div>
+                    {%else%}
+                    <div class="other-msg">
+                        <div class="msg-content">
+                            <h2>{{msg[0]}}</h2>
+                            <h3>{{msg[1]}}</h3>
+                        </div>
+                    </div>
+                    {%endif%}
+                {%endfor%}
+            {%else%}
+            <h1>select a chat to start a message or search for a user to start chatting</h1>
+            {%endif%}          
+
+        </div>
+        <div class="send">
+            <textarea id="msg" placeholder="Type a message ..." cols="1" rows="1"></textarea>
+            <button id="send-btn" class="send-btn">
+                <i class='bx bxs-send'></i>
+            </button>
+        </div>
+    </div>
+</section>
+<script>
+    const username = `{{user.username}}`
+    const id = `{{user.id}}`
+    const reciever = `{{other_user_id}}`
+</script>
+<script src="https://cdn.socket.io/4.4.1/socket.io.min.js" integrity="sha384-fKnu0iswBIqkjxrhQCTZ7qlLHOFEgNkRmK2vaO/LbTZSXdJfAu6ewRBdwHPhBo/H" crossorigin="anonymous"></script>
+<script src="{{url_for('static',filename='js/profile.js')}}"></script>
+{%endblock%}
+
+
+
+
+
+
+
+

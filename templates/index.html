@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+
+
+
+{%block content%}
+<div class="contain">
+    <h1>Sign up Here</h1>
+    <form method="post" action="{{url_for('index')}}" enctype="multipart/form-data">
+        <label>Username</label>
+        <input type="text" name="username" placeholder="enter a username ...">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="enter a password ...">
+        <label>Profile Image</label>
+        <!--  -->
+        <label class="file">
+            <input type="file" name="img">
+            <div class="file-content">
+                <i class='bx bxs-file-png'></i>
+                <p>Upload Image</p>
+            </div>
+            
+        </label>
+        <!--  -->
+        <button class="btn" type="submit">Sign Up</button>
+    </form>
+    <p><a href="{{url_for('login')}}">Login</a> here if you already have account</p>
+</div>
+
+
+
+
+{%endblock%}
+
+
+
+
+
+
+
+

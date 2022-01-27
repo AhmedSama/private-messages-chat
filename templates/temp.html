@@ -1,0 +1,13 @@
+<img src="{{url_for('static',filename=user.img)}}" alt="">
+<h1>hello {{user.username}}</h1>
+<p>id = {{user.id}}</p>
+<a data-logout href="{{url_for('logout')}}">logout</a>
+{%if my_msgs %}
+    {%for msg in my_msgs%}
+        <p>{{msg[0].img}}</p>
+        <h1>{{msg[0].username}}</h1>
+        <p>{{msg[1]}}</p>
+    {%endfor%}
+{%else%}
+<h1>you have no msgs yet!</h1>
+{%endif%}
